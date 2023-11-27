@@ -1,10 +1,12 @@
 import { SelectList } from "react-native-dropdown-select-list";
 import React, { FC } from "react";
 import { View, Text } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 import inputStyles from "../styles/TextInput";
 
 interface InputProps {
+    icon: string;
     invalid: boolean;
     placeholder: string;
     func: Function;
@@ -23,24 +25,35 @@ const Dropdown: FC<InputProps> = (props): JSX.Element => {
 
     return (
         <View>
-            <SelectList
-                setSelected={(val: any) => setSelected(val)}
-                onSelect={() => props.func(selected)}
-                data={data}
-                save="value"
-                placeholder="Select job type"
-                boxStyles={[
+            <View
+                style={[
                     props.invalid ? inputStyles.valid : inputStyles.invalid,
-                    inputStyles.dropbox,
+                    inputStyles.box,
                 ]}
-                inputStyles={{
-                    fontSize: 18,
-                }}
-                dropdownTextStyles={{
-                    fontSize: 18,
-                }}
-                dropdownStyles={inputStyles.dropdown}
-            />
+            >
+                <View style={inputStyles.iconBox}>
+                    <Icon
+                        name={props.icon}
+                        style={inputStyles.icon}
+                        size={36}
+                    />
+                </View>
+                <SelectList
+                    setSelected={(val: any) => setSelected(val)}
+                    onSelect={() => props.func(selected)}
+                    data={data}
+                    save="value"
+                    placeholder="Select job type"
+                    // boxStyles={inputStyles.dropbox}
+                    inputStyles={{
+                        fontSize: 18,
+                    }}
+                    dropdownTextStyles={{
+                        fontSize: 18,
+                    }}
+                    boxStyles={{ width: 320, borderWidth: 0 }}
+                />
+            </View>
             {props.invalid ? (
                 <View style={inputStyles.errorText}></View>
             ) : (

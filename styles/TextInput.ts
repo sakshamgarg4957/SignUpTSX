@@ -3,26 +3,19 @@ import { StyleSheet } from "react-native";
 const inputStyles = StyleSheet.create({
     input: {
         fontSize: 18,
-        borderWidth: 1,
         paddingLeft: 10,
+    },
+    box: {
+        borderWidth: 1,
         marginLeft: "5%",
         marginRight: "5%",
         backgroundColor: "white",
+        display: "flex",
+        flexDirection: "row",
     },
     dropbox: {
         paddingLeft: 10,
-        marginLeft: "5%",
         marginRight: "5%",
-        backgroundColor: "white",
-        borderRadius: 0,
-    },
-    dropdown: {
-        paddingLeft: 10,
-        marginLeft: "5%",
-        marginRight: "5%",
-        borderRadius: 0,
-        marginTop: "1.5%",
-        marginBottom: "1.5%",
         backgroundColor: "white",
     },
     errorText: {
@@ -38,6 +31,16 @@ const inputStyles = StyleSheet.create({
     valid: {
         borderWidth: 1,
         borderColor: "black",
+    },
+    iconBox: {
+        height: "100%",
+        borderRightWidth: 1,
+        width: 50,
+        // backgroundColor: "#ECECEC",
+        paddingTop: 5,
+    },
+    icon: {
+        alignSelf: "center",
     },
 });
 

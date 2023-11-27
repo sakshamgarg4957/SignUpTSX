@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import React, { useState } from "react";
+import { View } from "react-native";
 import { useRef } from "react";
-import Icon from "react-native-vector-icons/FontAwesome";
-// import { Icon } from "@rneui/themed";
 
 import Input from "./components/Input";
 import Main from "./styles/Main";
@@ -19,14 +17,6 @@ const App = () => {
         job: useRef(""),
     };
 
-    const [myState, setMyState] = useState({
-        name: true,
-        phone: true,
-    });
-    useEffect(() => {
-        console.log("Use effect running");
-    }, [myState.name]);
-
     const [fullNameValid, setFullNameValid] = useState(true);
     const [emailValid, setEmaiValid] = useState(true);
     const [phoneValid, setPhoneValid] = useState(true);
@@ -36,12 +26,9 @@ const App = () => {
 
     const submit = () => {
         if (InputRef.fullName.current.indexOf(" ") <= 0) {
-            myState.name = false;
-            console.log(myState.name);
-        } else {
-            myState.name = true;
-            console.log(myState.name);
-        }
+            setFullNameValid(false);
+        } else setFullNameValid(true);
+
         var em =
             /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         var ph = /^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/;
@@ -70,8 +57,10 @@ const App = () => {
                 func={(txt: string) => {
                     InputRef.fullName.current = txt;
                 }}
-                invalid={myState.name}
+                invalid={fullNameValid}
                 hidden={false}
+                icon="user"
+                iconSize={35}
             />
             <Input
                 placeholder="Email address"
@@ -80,6 +69,8 @@ const App = () => {
                 }}
                 invalid={emailValid}
                 hidden={false}
+                icon="envelope-o"
+                iconSize={30}
             />
             <Input
                 placeholder="Phone number"
@@ -88,11 +79,14 @@ const App = () => {
                 }}
                 invalid={phoneValid}
                 hidden={false}
+                icon="phone"
+                iconSize={35}
             />
             <Dropdown
                 func={(txt: string) => (InputRef.job.current = txt)}
                 invalid={jobValid}
                 placeholder="Job type"
+                icon="briefcase"
             />
             <Input
                 placeholder="Create password"
@@ -101,6 +95,8 @@ const App = () => {
                 }}
                 invalid={passwordValid}
                 hidden={true}
+                icon="lock"
+                iconSize={38}
             />
             <Input
                 placeholder="Repeat password"
@@ -109,6 +105,8 @@ const App = () => {
                 }}
                 invalid={confirmValid}
                 hidden={true}
+                icon="lock"
+                iconSize={38}
             />
             <MyButton title="Create Account" func={submit} />
         </View>
